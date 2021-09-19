@@ -1,24 +1,40 @@
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
-import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core'
+import { ApolloServerPluginDrainHttpServer, ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core'
 import http from 'http'
-import { typeDefs, resolvers } from './schema'
+import fs from 'fs'
+import path from 'path'
+import { resolvers } from './resolvers/resolvers'
+import { getUserId } from './utils/auth'
 
 async function startApolloServer() {
   const app: express.Application = express();
   const httpServer = http.createServer(app);
 
   const server = new ApolloServer({
-    typeDefs,
+    typeDefs: fs.readFileSync(
+      path.join(__dirname, 'schema.graphql'), 'utf8'
+    ),
     resolvers,
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    context: ({ req }) => {
+      
+      return {
+        ...req,
+        id: req && req.headers.authorization ? getUserId(req) : null
+      };
+    },
+    plugins: [
+      ApolloServerPluginDrainHttpServer({ httpServer }),
+      ApolloServerPluginLandingPageGraphQLPlayground(),
+    ],
+    
   });
   await server.start();
 
   // Additional middleware can be mounted at this point to run before Apollo.
   // app.use('*', jwtCheck, requireAuth, checkScope);
 
-  // Mount Apollo middleware here.
+  // Mount Apollo middleware here
   server.applyMiddleware({ app });
   await new Promise(resolve => httpServer.listen({ port: 4000 }, resolve));
   

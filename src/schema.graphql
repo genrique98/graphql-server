@@ -1,0 +1,35 @@
+type Query {
+  info: String!
+  feed: [Book!]!
+  book(id: ID): Book
+  users: [User]
+}
+
+type Mutation {
+  addBook(title: String!, author: String!, category: String!): Book!
+  updateBook(id: ID!, url: String, description: String): Book!
+  deleteBook(id: ID!): Book
+
+  signup(email: String!, password: String!, name: String!, username: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+}
+
+type Book {
+  id: ID!
+  title: String!
+  author: String!
+  category: String!
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+  
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  username: String!
+  password: String!
+}
