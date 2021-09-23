@@ -1,7 +1,7 @@
 {
   "name": "graphql-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Apollo Graphql server",
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
@@ -25,6 +25,7 @@
     "apollo-server-express": "^3.2.0",
     "apollo-server-types": "^3.2.0",
     "bcrypt": "^5.0.1",
+    "dataloader": "^2.0.0",
     "db-migrate": "^0.11.12",
     "db-migrate-pg": "^1.2.2",
     "express": "^4.17.1",
