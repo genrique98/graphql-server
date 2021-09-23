@@ -1,6 +1,14 @@
 # Grapqhql 
+Apollo-Express Graphql server 
 
-# Set Up
+## Features
+- PostgreSQL migrations with db-migrate
+- Authorization JWT
+- Password encryption with Bcrypt
+- Caching / Batching with Graphql Dataloader
+
+
+## Set Up
 Add a .env file with the following variables:
 
 - POSTGRES_HOST=postgres
@@ -30,6 +38,7 @@ run: `npm install`, `npm run migrate`, and `npm run watch`, then navigate to `ht
 <!-- - deleteBook(id: ID!): Book -->
 
 Signup / login is required before using queries or mutations. Use token in HTTP header:
+
 {
   "Authorization": "Bearer (your_token)"
 }
