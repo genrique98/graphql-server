@@ -10,16 +10,16 @@ Apollo-Express Graphql server
 
 ## Set Up
 Add a .env file with the following variables:
-
-- POSTGRES_HOST=postgres
-- POSTGRES_USER=user
-- POSTGRES_PASSWORD=password
-- POSTGRES_DB=graphql
-- ENV=dev
-- BCRYPT_PASSWORD=(your_password)
-- SALT_ROUNDS=10
-- TOKEN_SECRET=(your_token)
-
+```
+POSTGRES_HOST=postgres
+POSTGRES_USER=user
+POSTGRES_PASSWORD=password
+POSTGRES_DB=graphql
+ENV=dev
+BCRYPT_PASSWORD=(your_password)
+SALT_ROUNDS=10
+TOKEN_SECRET=(your_token)
+```
 run: `psql` and `CREATE DATABASE graphql;`
 
 run: `npm install`, `npm run migrate`, and `npm run watch`, then navigate to `http://localhost:4000/graphql`
