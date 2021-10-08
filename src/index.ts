@@ -33,7 +33,7 @@ async function startApolloServer() {
   await server.start();
 
   // Additional middleware can be mounted at this point to run before Apollo.
-  app.use('*', cors); // app.use('*', jwtCheck, requireAuth, checkScope);
+  app.use(cors()); // app.use('*', jwtCheck, requireAuth, checkScope);
   server.applyMiddleware({ app });
 
   await new Promise(resolve => httpServer.listen({ port: 4000 }, resolve));
