@@ -1,9 +1,11 @@
-import * as Query from './Query'
-import * as Mutation from './Mutation'
+// import * as Query from './Query'
+import { Query } from './Query'
+// import { author } from './Query'
+import { Book } from './Book'
+import { Mutation } from './Mutation'
 
 export const resolvers = {
     Query,
     Mutation,
-    // User,
-    // Link
+    Book
 }
