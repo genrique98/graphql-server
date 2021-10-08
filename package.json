@@ -7,6 +7,7 @@
     "build": "npx tsc",
     "start": "nodemon src/index.ts",
     "migrate": "db-migrate --env dev up",
+    "migrate:down": "db-migrate --env dev down",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
