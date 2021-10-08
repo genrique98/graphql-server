@@ -25,7 +25,6 @@ function getUserId(req, authToken) {
         const userId = getTokenPayload(authToken);
         return userId;
     }
-    // con
     throw new Error('Hey: Not authenticated');
 }
 exports.getUserId = getUserId;

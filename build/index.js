@@ -20,6 +20,7 @@ const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const resolvers_1 = require("./resolvers/resolvers");
 const auth_1 = require("./utils/auth");
+const cors_1 = __importDefault(require("cors"));
 function startApolloServer() {
     return __awaiter(this, void 0, void 0, function* () {
         const app = express_1.default();
@@ -28,22 +29,16 @@ function startApolloServer() {
             typeDefs: fs_1.default.readFileSync(path_1.default.join(__dirname, 'schema.graphql'), 'utf8'),
             resolvers: resolvers_1.resolvers,
             context: ({ req }) => {
-                // const user = getUserId(req);
-                // console.log(user)
-                // if (!user) throw new Error('you must be logged'); //AuthenticationError('you must be logged in');
-                // return { ...req, user }
                 return Object.assign(Object.assign({}, req), { id: req && req.headers.authorization ? auth_1.getUserId(req) : null });
             },
             plugins: [
                 apollo_server_core_1.ApolloServerPluginDrainHttpServer({ httpServer }),
                 apollo_server_core_1.ApolloServerPluginLandingPageGraphQLPlayground(),
-                // graphiql: process.env.NODE_ENV === 'development',
             ],
         });
         yield server.start();
         // Additional middleware can be mounted at this point to run before Apollo.
-        // app.use('*', jwtCheck, requireAuth, checkScope);
-        // Mount Apollo middleware here
+        app.use(cors_1.default()); // app.use('*', jwtCheck, requireAuth, checkScope);
         server.applyMiddleware({ app });
         yield new Promise(resolve => httpServer.listen({ port: 4000 }, resolve));
         console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
