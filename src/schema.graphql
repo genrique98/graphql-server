@@ -17,7 +17,7 @@ type Query {
 type Mutation {
   addBook(title: String!, category: String!, author_id: ID!, publisher_id: ID!): Book!
   # updateBook(id: ID!, url: String, description: String): Book!
-  deleteBook(id: ID!): Book
+  #deleteBook(id: ID!): Book
 
   addAuthor(name: String!, lastName: String!, bio: String!): Author!
 
@@ -35,10 +35,10 @@ type AuthPayload {
 
 type Book {
   id: ID!
-  title: String
-  category: String
-  author: Author
-  publisher: Publisher
+  title: String!
+  category: String!
+  author: Author!
+  publisher: Publisher!
   # tags: [String!]
 }
 
@@ -54,12 +54,10 @@ type Author {
   id: ID!
   name: String!
   lastName: String
-  bio: String
-  # books: [Book!]!
+  bio: String!
 }
 
 type Publisher {
   id: ID!
   name: String!
-  # books: [Book!]!
 }
